@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CoordinatesDto(
-    @SerialName("lon") val longitude: Double? = null,
-    @SerialName("lat") val latitude: Double? = null
+    @SerialName("lon") val longitude: Double?,
+    @SerialName("lat") val latitude: Double?
 )

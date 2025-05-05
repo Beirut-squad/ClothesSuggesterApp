@@ -5,12 +5,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AtmosphericDetailsDto(
-    val temp: Double? = null,
-    @SerialName("feels_like") val feelsLike: Double? = null,
-    @SerialName("temp_min") val tempMin: Double? = null,
-    @SerialName("temp_max") val tempMax: Double? = null,
-    @SerialName("pressure") val pressure: Int? = null,
-    @SerialName("humidity") val humidity: Int? = null,
-    @SerialName("sea_level") val seaLevel: Int? = null,
-    @SerialName("grnd_level") val groundLevel: Int? = null
+    @SerialName("temp") val temperature: Double?,
+    @SerialName("feels_like") val feelsLike: Double?,
+    @SerialName("temp_min") val minTemperature: Double?,
+    @SerialName("temp_max") val maxTemperature: Double?,
+    val pressure: Int?,
+    val humidity: Int?,
+    @SerialName("sea_level") val seaLevel: Int?,
+    @SerialName("grnd_level") val groundLevel: Int?
 )

@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CloudsDto(
-    @SerialName("all" ) val all : Int? = null
+    @SerialName("all" ) val cloudsPercentage : Int?
 )
