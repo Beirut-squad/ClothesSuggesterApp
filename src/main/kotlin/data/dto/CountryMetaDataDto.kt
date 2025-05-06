@@ -5,9 +5,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CountryMetaDataDto(
-    val type: Int?,
-    val id: Int?,
-    val country: String?,
-    @SerialName("sunrise") val sunriseTimestamp: Long?,
-    @SerialName("sunset") val sunsetTimestamp: Long?
+    @SerialName("type") val type: Int? = null,
+    @SerialName("id") val id: Int? = null,
+    @SerialName("country")val country: String? = null,
+    @SerialName("sunrise") val sunriseTimestamp: Long? = null,
+    @SerialName("sunset") val sunsetTimestamp: Long? = null
 )
