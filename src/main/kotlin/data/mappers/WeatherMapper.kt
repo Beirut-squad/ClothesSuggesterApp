@@ -48,6 +48,7 @@ fun WeatherDto.toWeather(): Weather {
 fun WindDto.toWind(): Wind {
     return Wind(
         speed = this.speed,
+        gust = this.gust,
         degree = this.degree
     )
 }

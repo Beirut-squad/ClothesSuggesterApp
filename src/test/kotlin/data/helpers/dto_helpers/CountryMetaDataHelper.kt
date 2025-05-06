@@ -1,4 +1,4 @@
-package data.dto_helpers
+package data.helpers.dto_helpers
 
 import org.example.data.dto.CountryMetaDataDto
 
