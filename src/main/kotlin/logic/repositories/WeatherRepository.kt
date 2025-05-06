@@ -1,5 +1,7 @@
 package org.example.logic.repositories
 
+import org.example.logic.models.WeatherData
+
 interface WeatherRepository {
-    fun getWeatherData()
+    suspend fun getWeatherData(): WeatherData
 }
