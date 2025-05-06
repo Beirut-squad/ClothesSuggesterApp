@@ -1,4 +1,4 @@
-package dto_helpers
+package data.dto_helpers
 
 import org.example.data.dto.AtmosphericDetailsDto
 import org.example.data.dto.CloudsDto
