@@ -2,6 +2,9 @@ package logic.usecases
 
 import com.google.common.truth.Truth.assertThat
 import helper.createAtmosphericDetailsHelper
+import helper.createCloudsHelper
+import helper.createWeatherHelper
+import helper.createWindHelper
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -77,7 +80,7 @@ class SuggestOutfitUseCaseTest{
     }
 
     @Test
-    fun `should throw exception  if atmospheric data was not recieved`() = runTest{
+    fun `should throw exception  if atmospheric data was not recieved  `() = runTest{
         // Given
         coEvery { weatherRepository.getWeatherData().atmosphericData } returns null
 
