@@ -4,11 +4,12 @@ import org.example.logic.exceptions.WeatherDataNotFoundException
 import org.example.logic.helper.*
 import org.example.logic.models.*
 import org.example.logic.repositories.WeatherRepository
+import org.intellij.lang.annotations.Language
 
 class SuggestOutfitUseCase(private val weatherRepository: WeatherRepository) {
 
-    suspend fun getOutfitBasedOnTemperature(): Outfit {
-        val weatherData = weatherRepository.getWeatherData()
+    suspend fun getOutfitBasedOnTemperature(city : String , language: String): Outfit {
+        val weatherData = weatherRepository.getWeatherData(city,language)
         if (checkIfNull(weatherData))
             throw WeatherDataNotFoundException(" weather data not found")
 
