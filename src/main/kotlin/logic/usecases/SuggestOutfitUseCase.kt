@@ -8,8 +8,8 @@ import org.intellij.lang.annotations.Language
 
 class SuggestOutfitUseCase(private val weatherRepository: WeatherRepository) {
 
-    suspend fun getOutfitBasedOnTemperature(city : String , language: String): Outfit {
-        val weatherData = weatherRepository.getWeatherData(city,language)
+    suspend fun getOutfitBasedOnTemperature(city : String): Outfit {
+        val weatherData = weatherRepository.getWeatherData(city)
         if (checkIfNull(weatherData))
             throw WeatherDataNotFoundException(" weather data not found")
 
