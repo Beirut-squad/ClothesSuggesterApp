@@ -1,5 +1,7 @@
 package org.example.ui
 
+import kotlinx.coroutines.runBlocking
+import org.example.logic.models.Outfit
 import org.example.logic.usecases.SuggestOutfitUseCase
 import org.example.ui.components.Reader
 import org.example.ui.components.UiFeature
@@ -8,9 +10,54 @@ import org.example.ui.components.Viewer
 class ClothesSuggesterUi(
     private val reader: Reader,
     private val viewer: Viewer,
-    private val suggestOutfitUseCase: SuggestOutfitUseCase
-    ) : UiFeature {
+    private val suggestOutfitUseCase: SuggestOutfitUseCase,
+) : UiFeature {
     override fun show() {
+        viewer.printWelcomeMessage("Welcome to outfit suggester ")
+        var running = true
+        while (running) {
+            viewer.printOptions(
+                "Get an outfit",
+                "go back"
+            )
 
+            viewer.printInfoLine("Enter your choice:")
+            val input = reader.readInt()
+            when (input) {
+                1 -> {
+                    goToSuggestion()
+                }
+
+                else -> running = false
+            }
+        }
+    }
+
+
+    private fun goToSuggestion(){
+        while (true){
+            viewer.printInfoLine("enter the city name: ")
+            val cityName = reader.readInput()
+            viewer.printInfoLine("enter the language you want: ")
+            val language = reader.readInput()?.replace(" ","")
+            if (cityName == "" || language == ""){
+                viewer.printError("Please enter a city")
+                continue
+            }
+            runBlocking { suggestRandomOutfit(cityName!!,language!!) }
+            break
+        }
+    }
+    private suspend fun suggestRandomOutfit(cityName: String, language: String) {
+        val randomOutfit = suggestOutfitUseCase.getOutfitBasedOnTemperature(cityName,language)
+        showOutfitDetails(randomOutfit)
+    }
+
+    private fun showOutfitDetails(outfit: Outfit) {
+        viewer.printTitle("\nThis is a suitable outfit for the weather right now , enjoy :) ")
+        viewer.printCorrectOutput("For head wear : ${outfit.headWear}")
+        viewer.printCorrectOutput("For upper body wear : ${outfit.upperBody}")
+        viewer.printCorrectOutput("For lower body wear : ${outfit.lowerBody}")
+        viewer.printCorrectOutput("For foot wear : ${outfit.footWear}\n")
     }
 }
