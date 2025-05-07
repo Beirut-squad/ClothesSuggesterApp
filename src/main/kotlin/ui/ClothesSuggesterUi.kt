@@ -28,7 +28,7 @@ class ClothesSuggesterUi(
                     goToSuggestion()
                 }
                 "2" -> running= false
-                else -> running = false
+                else -> viewer.printError("Invalid option")
             }
         }
     }
