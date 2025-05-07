@@ -11,6 +11,7 @@ import org.example.ui.ClothesSuggesterUi
 import org.example.ui.components.Reader
 import org.example.ui.components.Viewer
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class ClothesSuggesterUiTest{
@@ -66,13 +67,12 @@ class ClothesSuggesterUiTest{
 
         // Then
         verify { viewer.printInfoLine("enter the city name: ") }
-        verify { viewer.printInfoLine("enter the language you want: ") }
     }
 
     @Test
     fun ` should print error message if user didn't enter a city name`(){
         // Given
-        every { reader.readInput() } returnsMany listOf("1","   ","en","2")
+        every { reader.readInput() } returnsMany listOf("1","   ","2")
         // When
         clothesSuggesterUi.show()
 
@@ -82,7 +82,7 @@ class ClothesSuggesterUiTest{
     @Test
     fun ` should print error message if  user didn't enter a city name`(){
         // Given
-        every { reader.readInput() } returnsMany listOf("1",null,"en","2")
+        every { reader.readInput() } returnsMany listOf("1",null,"2")
         // When
         clothesSuggesterUi.show()
 
@@ -90,6 +90,8 @@ class ClothesSuggesterUiTest{
         verify {  viewer.printError("Please enter a city") }
     }
 
+
+    @Disabled
     @Test
     fun ` should print error message if user didn't enter a language `(){
         // Given
@@ -101,6 +103,7 @@ class ClothesSuggesterUiTest{
         verify { viewer.printError("Please enter a language") }
     }
 
+    @Disabled
     @Test
     fun ` should print  error message if user didn't enter a language `(){
         // Given
@@ -113,7 +116,7 @@ class ClothesSuggesterUiTest{
     }
 
     @Test
-    fun ` should print outfit details user enters a city name and a language `(){
+    fun ` should print outfit details user enters a city name`(){
         val outfit = Outfit(
             headWear = "cap",
             upperBody = "t-shirt",
@@ -122,8 +125,8 @@ class ClothesSuggesterUiTest{
         )
         runBlocking {
             // Given
-            every { reader.readInput() } returnsMany listOf("1","cairo","en","2")
-            coEvery { suggestOutfitUseCase.getOutfitBasedOnTemperature("cairo","en") } returns outfit
+            every { reader.readInput() } returnsMany listOf("1","cairo","2")
+            coEvery { suggestOutfitUseCase.getOutfitBasedOnTemperature("cairo") } returns outfit
             // When
             clothesSuggesterUi.show()
 

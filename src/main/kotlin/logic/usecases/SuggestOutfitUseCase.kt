@@ -6,7 +6,7 @@ import org.example.logic.repositories.WeatherRepository
 class SuggestOutfitUseCase(
     private val weatherRepository: WeatherRepository
 ) {
-    suspend fun getOutfitBasedOnTemperature(city: String , language: String): Outfit {
+    suspend fun getOutfitBasedOnTemperature(city: String): Outfit {
         return Outfit(
             headWear = "cap",
             upperBody = "t-shirt",

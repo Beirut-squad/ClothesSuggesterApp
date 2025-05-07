@@ -36,8 +36,7 @@ class ClothesSuggesterUi(
 
     private fun goToSuggestion() {
         val cityName = readCity()
-        val language = readLanguage()
-        runBlocking { suggestRandomOutfit(cityName, language) }
+        runBlocking { suggestRandomOutfit(cityName) }
     }
 
     private fun readCity(): String{
@@ -52,20 +51,20 @@ class ClothesSuggesterUi(
         }
     }
 
-    private fun readLanguage(): String{
-        while (true){
-            viewer.printInfoLine("enter the language you want: ")
-            val language = reader.readInput()?.replace(" ","")
-            if (language == "" || language == null){
-                viewer.printError("Please enter a language")
-                continue
-            }
-            return language
-        }
-    }
+//    private fun readLanguage(): String{
+//        while (true){
+//            viewer.printInfoLine("enter the language you want: ")
+//            val language = reader.readInput()?.replace(" ","")
+//            if (language == "" || language == null){
+//                viewer.printError("Please enter a language")
+//                continue
+//            }
+//            return language
+//        }
+//    }
 
-    private suspend fun suggestRandomOutfit(cityName: String, language: String) {
-        val randomOutfit = suggestOutfitUseCase.getOutfitBasedOnTemperature(cityName,language)
+    private suspend fun suggestRandomOutfit(cityName: String) {
+        val randomOutfit = suggestOutfitUseCase.getOutfitBasedOnTemperature(cityName)
         showOutfitDetails(randomOutfit)
     }
 

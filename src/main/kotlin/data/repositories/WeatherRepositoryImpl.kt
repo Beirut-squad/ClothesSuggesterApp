@@ -6,7 +6,6 @@ import org.example.logic.repositories.WeatherRepository
 class WeatherRepositoryImpl : WeatherRepository {
     override suspend fun getWeatherData(
         city: String,
-        language: String
     ): WeatherData {
         TODO("Not yet implemented")
     }
