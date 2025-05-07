@@ -47,3 +47,6 @@ bin/
 
 ### CSV files ###
 *.csv
+
+### local properties
+local.properties
