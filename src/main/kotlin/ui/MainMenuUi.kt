@@ -25,8 +25,8 @@ class MainMenuUi(
             when (input) {
                 1 -> {
                     gotToSuggestOutfitUi()
-                    break
                 }
+                else -> running = false
             }
 
         }
