@@ -32,6 +32,9 @@ class MainMenuUi(
                     viewer.printGoodbyeMessage("Goodbye :)")
                     isRunning = false
                 }
+                else -> {
+                    viewer.printError("Invalid option")
+                }
             }
 
         }
