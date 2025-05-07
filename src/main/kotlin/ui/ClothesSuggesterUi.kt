@@ -22,39 +22,55 @@ class ClothesSuggesterUi(
             )
 
             viewer.printInfoLine("Enter your choice:")
-            val input = reader.readInt()
+            val input = reader.readInput()
             when (input) {
-                1 -> {
+                "1" -> {
                     goToSuggestion()
                 }
-
+                "2" -> running= false
                 else -> running = false
             }
         }
     }
 
 
-    private fun goToSuggestion(){
+    private fun goToSuggestion() {
+        val cityName = readCity()
+        val language = readLanguage()
+        runBlocking { suggestRandomOutfit(cityName, language) }
+    }
+
+    private fun readCity(): String{
         while (true){
             viewer.printInfoLine("enter the city name: ")
-            val cityName = reader.readInput()
-            viewer.printInfoLine("enter the language you want: ")
-            val language = reader.readInput()?.replace(" ","")
-            if (cityName == "" || language == ""){
+            val cityName = reader.readInput()?.replace(" ","")
+            if (cityName == "" || cityName == null){
                 viewer.printError("Please enter a city")
                 continue
             }
-            runBlocking { suggestRandomOutfit(cityName!!,language!!) }
-            break
+            return cityName
         }
     }
+
+    private fun readLanguage(): String{
+        while (true){
+            viewer.printInfoLine("enter the language you want: ")
+            val language = reader.readInput()?.replace(" ","")
+            if (language == "" || language == null){
+                viewer.printError("Please enter a language")
+                continue
+            }
+            return language
+        }
+    }
+
     private suspend fun suggestRandomOutfit(cityName: String, language: String) {
         val randomOutfit = suggestOutfitUseCase.getOutfitBasedOnTemperature(cityName,language)
         showOutfitDetails(randomOutfit)
     }
 
     private fun showOutfitDetails(outfit: Outfit) {
-        viewer.printTitle("\nThis is a suitable outfit for the weather right now , enjoy :) ")
+        viewer.printTitle("\nThis is a suitable outfit for the weather right now , enjoy your day :) ")
         viewer.printCorrectOutput("For head wear : ${outfit.headWear}")
         viewer.printCorrectOutput("For upper body wear : ${outfit.upperBody}")
         viewer.printCorrectOutput("For lower body wear : ${outfit.lowerBody}")
