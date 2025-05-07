@@ -10,22 +10,21 @@ import org.example.data.dto.WeatherResponseDto
 import org.example.data.exceptions.CityNotFoundException
 import org.example.data.utils.ApiKey
 
-class ApiDataSourceImpl : DataSource {
+class ApiDataSourceImpl(
+    private val client: HttpClient = HttpClient(CIO)
+) : DataSource {
 
     override suspend fun getWeatherData(
         city: String,
         language: String
     ): WeatherResponseDto {
-        return runBlocking {
-            val client = HttpClient(CIO)
-            val response = client.get(getUrl(city, language))
-            if (response.status.value != 200) {
-                throw CityNotFoundException("No data found for the city: $city")
-            }
-            val weatherResponseDto: WeatherResponseDto =
-                Json.decodeFromString<WeatherResponseDto>(response.bodyAsText())
-            weatherResponseDto
+        val response = client.get(getUrl(city, language))
+        if (response.status.value != 200) {
+            throw CityNotFoundException("No data found for the city: $city")
         }
+        val weatherResponseDto: WeatherResponseDto =
+            Json.decodeFromString<WeatherResponseDto>(response.bodyAsText())
+        return weatherResponseDto
     }
 
     private fun getUrl(city: String, language: String): String {
