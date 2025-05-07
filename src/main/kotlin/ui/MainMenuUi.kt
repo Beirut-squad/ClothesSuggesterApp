@@ -10,10 +10,11 @@ class MainMenuUi(
     private val clothesSuggesterUi: ClothesSuggesterUi
 ) : UiFeature {
     override fun show() {
-        viewer.printTitle("Clothes Suggester UI is ready")
+        viewer.printWelcomeMessage("Welcome")
+        viewer.printTitle("Clothes Suggester App is ready")
 
-        var running = true
-        while (running) {
+        var isRunning = true
+        while (isRunning) {
             viewer.printOptions(
                 "Suggest outfit for a person",
                 "Exit"
@@ -24,15 +25,18 @@ class MainMenuUi(
             val input = reader.readInt()
             when (input) {
                 1 -> {
-                    gotToSuggestOutfitUi()
+                    clothesSuggesterUi.show()
                 }
-                else -> running = false
+
+                2 -> {
+                    viewer.printGoodbyeMessage("Goodbye :)")
+                    isRunning = false
+                }
+                else -> {
+                    viewer.printError("Invalid option")
+                }
             }
 
         }
-    }
-
-    private fun gotToSuggestOutfitUi() {
-        clothesSuggesterUi.show()
     }
 }
