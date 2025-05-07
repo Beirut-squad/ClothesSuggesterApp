@@ -15,10 +15,9 @@ class ApiDataSourceImpl(
 ) : DataSource {
 
     override suspend fun getWeatherData(
-        city: String,
-        language: String
+        city: String
     ): WeatherResponseDto {
-        val response = client.get(getUrl(city, language))
+        val response = client.get(getUrl(city))
         if (response.status.value != 200) {
             throw CityNotFoundException("No data found for the city: $city")
         }
@@ -27,11 +26,11 @@ class ApiDataSourceImpl(
         return weatherResponseDto
     }
 
-    private fun getUrl(city: String, language: String): String {
+    private fun getUrl(city: String): String {
         val baseUrl =
             "https://api.openweathermap.org/data/2.5/weather?q=${city}&" +
                     "appid=${ApiKey.API_KEY}&" +
-                    "units=metric&lang=${language}"
+                    "units=metric"
         return baseUrl
     }
 

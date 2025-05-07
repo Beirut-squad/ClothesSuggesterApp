@@ -9,8 +9,8 @@ class WeatherRepositoryImpl(
     val dataSource: DataSource
 ) : WeatherRepository {
 
-    override suspend fun getWeatherData(city: String, language: String): WeatherData {
-        val weatherData = dataSource.getWeatherData(city = city, language = language)
+    override suspend fun getWeatherData(city: String): WeatherData {
+        val weatherData = dataSource.getWeatherData(city = city)
 
         return weatherData.toWeatherData()
     }
