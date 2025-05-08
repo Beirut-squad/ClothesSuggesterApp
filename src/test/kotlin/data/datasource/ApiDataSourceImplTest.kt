@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
+
 
 class ApiDataSourceImplTest {
     private lateinit var apiDataSourceImpl: ApiDataSourceImpl
@@ -22,10 +21,9 @@ class ApiDataSourceImplTest {
         runTest {
             // Given
             val city = "london"
-            val language = "ar"
 
             // When
-            val result = apiDataSourceImpl.getWeatherData(city, language)
+            val result = apiDataSourceImpl.getWeatherData(city)
 
             // Then
             assertEquals(SUCCESSFUL_CODE, result.httpResponseCode)
@@ -38,17 +36,15 @@ class ApiDataSourceImplTest {
         runTest {
             // Given
             val city = "invalid city"
-            val language = "en"
 
             // When & Then
             assertThrows<Exception> {
-                apiDataSourceImpl.getWeatherData(city, language)
+                apiDataSourceImpl.getWeatherData(city)
             }
         }
     }
 
     companion object {
         const val SUCCESSFUL_CODE = 200
-        const val NOT_FOUND_CODE = 404
     }
 }
