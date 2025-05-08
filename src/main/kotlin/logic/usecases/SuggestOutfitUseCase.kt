@@ -31,11 +31,11 @@ class SuggestOutfitUseCase(private val weatherRepository: WeatherRepository) {
 
     private fun getOutfitsBasedOnTemperature(temp: Double): List<Outfit> {
         return when (temp) {
-            in -50.0..7.0 -> freezingOutfits
-            in 7.1..13.0 -> coldOutfits
-            in 13.1..18.0 -> averageOutfits
-            in 18.1..26.0 -> warmOutfits
-            in 26.1..50.0 -> hotOutfits
+            in -50.0..7.0 -> outfitsBasedOnWeather.freezingOutfits
+            in 7.1..13.0 -> outfitsBasedOnWeather.coldOutfits
+            in 13.1..18.0 -> outfitsBasedOnWeather.averageOutfits
+            in 18.1..26.0 -> outfitsBasedOnWeather.warmOutfits
+            in 26.1..50.0 -> outfitsBasedOnWeather.hotOutfits
             else -> deathOutfits
         }
     }

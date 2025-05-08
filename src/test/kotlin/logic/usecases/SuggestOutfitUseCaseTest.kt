@@ -12,6 +12,7 @@ import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.example.logic.helper.*
 import org.example.logic.models.Weather
+import org.example.logic.models.outfitsBasedOnWeather
 import org.example.logic.repositories.WeatherRepository
 import org.example.logic.usecases.SuggestOutfitUseCase
 import org.junit.jupiter.api.BeforeEach
@@ -125,7 +126,7 @@ class SuggestOutfitUseCaseTest{
         val result = suggestOutfitUseCase.getOutfitBasedOnTemperature("")
 
         // Then
-        assertThat(result).isIn(freezingOutfits)
+        assertThat(result).isIn(outfitsBasedOnWeather.freezingOutfits)
     }
 
     @Test
@@ -139,7 +140,7 @@ class SuggestOutfitUseCaseTest{
         val result = suggestOutfitUseCase.getOutfitBasedOnTemperature("")
 
         // Then
-        assertThat(result).isIn(coldOutfits)
+        assertThat(result).isIn(outfitsBasedOnWeather.coldOutfits)
     }
 
     @Test
@@ -153,7 +154,7 @@ class SuggestOutfitUseCaseTest{
         val result = suggestOutfitUseCase.getOutfitBasedOnTemperature("")
 
         // Then
-        assertThat(result).isIn(averageOutfits)
+        assertThat(result).isIn(outfitsBasedOnWeather.averageOutfits)
     }
 
     @Test
@@ -167,7 +168,7 @@ class SuggestOutfitUseCaseTest{
         val result = suggestOutfitUseCase.getOutfitBasedOnTemperature("")
 
         // Then
-        assertThat(result).isIn(warmOutfits)
+        assertThat(result).isIn(outfitsBasedOnWeather.warmOutfits)
     }
 
     @Test
@@ -181,7 +182,7 @@ class SuggestOutfitUseCaseTest{
         val result = suggestOutfitUseCase.getOutfitBasedOnTemperature("")
 
         // Then
-        assertThat(result).isIn(hotOutfits)
+        assertThat(result).isIn(outfitsBasedOnWeather.hotOutfits)
     }
 
     @Test
@@ -194,7 +195,7 @@ class SuggestOutfitUseCaseTest{
         // When
         val result = suggestOutfitUseCase.getOutfitBasedOnTemperature("")
         // Then
-        assertThat(result).isIn(deathOutfits)
+        assertThat(result).isIn(outfitsBasedOnWeather.deathOutfits)
     }
 
     @Test
@@ -207,6 +208,6 @@ class SuggestOutfitUseCaseTest{
         // When
         val result = suggestOutfitUseCase.getOutfitBasedOnTemperature("")
         // Then
-        assertThat(result).isIn(deathOutfits)
+        assertThat(result).isIn(outfitsBasedOnWeather.deathOutfits)
     }
 }
