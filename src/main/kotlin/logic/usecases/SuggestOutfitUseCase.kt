@@ -36,7 +36,7 @@ class SuggestOutfitUseCase(private val weatherRepository: WeatherRepository) {
             in 13.1..18.0 -> outfitsBasedOnWeather.averageOutfits
             in 18.1..26.0 -> outfitsBasedOnWeather.warmOutfits
             in 26.1..50.0 -> outfitsBasedOnWeather.hotOutfits
-            else -> deathOutfits
+            else -> outfitsBasedOnWeather.deathOutfits
         }
     }
 }
