@@ -13,7 +13,7 @@ import org.example.logic.exceptions.UnexpectedWeatherException
 import org.example.logic.exceptions.WeatherServiceException
 
 class WeatherRepositoryImpl(
-    val dataSource: DataSource
+    private val dataSource: DataSource
 ) : WeatherRepository {
 
     override suspend fun getWeatherData(city: String): WeatherData {
