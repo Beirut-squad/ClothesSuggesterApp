@@ -4,10 +4,12 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
-import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import org.example.data.dto.WeatherResponseDto
-import org.example.data.exceptions.CityNotFoundException
+import org.example.data.exceptions.NotFoundException
+import org.example.data.exceptions.ServerErrorException
+import org.example.data.exceptions.UnAuthorizedException
+import org.example.data.exceptions.UnknownApiException
 import org.example.data.utils.ApiKey
 
 class ApiDataSourceImpl(
@@ -18,20 +20,28 @@ class ApiDataSourceImpl(
         city: String
     ): WeatherResponseDto {
         val response = client.get(getUrl(city))
-        if (response.status.value != 200) {
-            throw CityNotFoundException("No data found for the city: $city")
+
+        val apiErrorCode = response.status.value
+        when (apiErrorCode) {
+            in 200..299 -> {
+                return Json.decodeFromString<WeatherResponseDto>(response.bodyAsText())
+            }
+
+            401 -> throw UnAuthorizedException("Invalid Api Key")
+            404 -> throw NotFoundException("No data found for the city: $city")
+
+            in 500..599 -> throw ServerErrorException("Server Error: HTTP $apiErrorCode")
+
+            else -> throw UnknownApiException("Unknown error $apiErrorCode")
         }
-        val weatherResponseDto: WeatherResponseDto =
-            Json.decodeFromString<WeatherResponseDto>(response.bodyAsText())
-        return weatherResponseDto
     }
 
     private fun getUrl(city: String): String {
-        val baseUrl =
+        val url =
             "https://api.openweathermap.org/data/2.5/weather?q=${city}&" +
                     "appid=${ApiKey.API_KEY}&" +
                     "units=metric"
-        return baseUrl
+        return url
     }
 
 }
