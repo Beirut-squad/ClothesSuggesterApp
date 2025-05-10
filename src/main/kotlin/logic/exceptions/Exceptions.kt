@@ -7,3 +7,5 @@ class CityNotFoundException(message: String) : Exception(message)
 class WeatherServiceException(message: String) : Exception(message)
 
 class UnexpectedWeatherException(message: String) : Exception(message)
+
+class WeatherDataNotFoundException(message: String) : Exception(message)

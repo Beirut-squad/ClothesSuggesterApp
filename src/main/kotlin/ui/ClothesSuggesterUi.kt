@@ -17,7 +17,7 @@ class ClothesSuggesterUi(
         var running = true
         while (running) {
             viewer.printOptions(
-                "Get an outfit",
+                "Get an outfit based on current temperature",
                 "go back"
             )
 
