@@ -1,4 +1,4 @@
-package org.example.data.mappers
+package data.mapper
 
 import org.example.data.dto.*
 import org.example.logic.models.*
@@ -48,6 +48,7 @@ fun WeatherDto.toWeather(): Weather {
 fun WindDto.toWind(): Wind {
     return Wind(
         speed = this.speed,
+        gust = this.gust,
         degree = this.degree
     )
 }
