@@ -1,10 +1,10 @@
-package org.example.data.repositories
+package data.repository
 
 import org.example.data.datasource.DataSource
-import org.example.data.exceptions.NotFoundException
-import org.example.data.exceptions.ServerErrorException
-import org.example.data.exceptions.UnAuthorizedException
-import org.example.data.mappers.toWeatherData
+import data.exception.NotFoundException
+import data.exception.ServerErrorException
+import data.exception.UnAuthorizedException
+import data.mapper.toWeatherData
 import org.example.logic.models.WeatherData
 import org.example.logic.repositories.WeatherRepository
 import org.example.logic.exceptions.WeatherServiceAuthenticationException

@@ -6,10 +6,10 @@ import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import kotlinx.serialization.json.Json
 import org.example.data.dto.WeatherResponseDto
-import org.example.data.exceptions.NotFoundException
-import org.example.data.exceptions.ServerErrorException
-import org.example.data.exceptions.UnAuthorizedException
-import org.example.data.exceptions.UnknownApiException
+import data.exception.NotFoundException
+import data.exception.ServerErrorException
+import data.exception.UnAuthorizedException
+import data.exception.UnknownApiException
 import org.example.data.utils.ApiKey
 
 class ApiDataSourceImpl(

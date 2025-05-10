@@ -1,4 +1,4 @@
-package data.repositories
+package data.repository
 
 import data.helpers.dto_helpers.createWeatherResponseDtoHelper
 import data.helpers.model_helpers.createWeatherDataHelper
@@ -6,7 +6,6 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.example.data.datasource.DataSource
-import org.example.data.repositories.WeatherRepositoryImpl
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

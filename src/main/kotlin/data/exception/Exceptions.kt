@@ -1,4 +1,4 @@
-package org.example.data.exceptions
+package data.exception
 
 class UnAuthorizedException(message: String): Exception(message)
 

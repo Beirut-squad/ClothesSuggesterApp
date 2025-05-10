@@ -1,4 +1,4 @@
-package org.example.data.mappers
+package data.mapper
 
 import org.example.data.dto.*
 import org.example.logic.models.*
