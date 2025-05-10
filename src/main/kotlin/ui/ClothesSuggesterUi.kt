@@ -51,18 +51,6 @@ class ClothesSuggesterUi(
         }
     }
 
-//    private fun readLanguage(): String{
-//        while (true){
-//            viewer.printInfoLine("enter the language you want: ")
-//            val language = reader.readInput()?.replace(" ","")
-//            if (language == "" || language == null){
-//                viewer.printError("Please enter a language")
-//                continue
-//            }
-//            return language
-//        }
-//    }
-
     private suspend fun suggestRandomOutfit(cityName: String) {
         val randomOutfit = suggestOutfitUseCase.getOutfitBasedOnTemperature(cityName)
         showOutfitDetails(randomOutfit)
