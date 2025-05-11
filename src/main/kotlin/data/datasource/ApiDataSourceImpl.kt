@@ -10,7 +10,7 @@ import data.exception.NotFoundException
 import data.exception.ServerErrorException
 import data.exception.UnAuthorizedException
 import data.exception.UnknownApiException
-import org.example.data.utils.ApiKey
+import org.example.data.utils.ApiKeyProvider
 
 class ApiDataSourceImpl(
     private val client: HttpClient = HttpClient(CIO)
@@ -39,7 +39,7 @@ class ApiDataSourceImpl(
     private fun getUrl(city: String): String {
         val url =
             "https://api.openweathermap.org/data/2.5/weather?q=${city}&" +
-                    "appid=${ApiKey.API_KEY}&" +
+                    "appid=${ApiKeyProvider.getApiKey()}&" +
                     "units=metric"
         return url
     }
