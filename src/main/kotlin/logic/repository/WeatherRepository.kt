@@ -1,4 +1,4 @@
-package org.example.logic.repositories
+package logic.repository
 
 import org.example.logic.models.WeatherData
 

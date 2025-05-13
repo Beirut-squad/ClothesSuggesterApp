@@ -1,24 +1,16 @@
-package logic.usecases
+package logic.usecase
 
-import com.google.common.base.CharMatcher.any
 import com.google.common.truth.Truth.assertThat
 import helper.createAtmosphericDetailsHelper
-import helper.createCloudsHelper
-import helper.createWeatherHelper
-import helper.createWindHelper
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.example.logic.helper.*
-import org.example.logic.models.Weather
-import org.example.logic.repositories.WeatherRepository
+import logic.repository.WeatherRepository
 import org.example.logic.usecases.SuggestOutfitUseCase
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import kotlin.test.assertEquals
 
 class SuggestOutfitUseCaseTest{
 

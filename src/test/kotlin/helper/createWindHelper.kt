@@ -8,6 +8,7 @@ fun createWindHelper(
 ): Wind{
     return Wind(
         speed = speed,
-        degree = degree
+        degree = degree,
+        gust = 10.0
     )
 }

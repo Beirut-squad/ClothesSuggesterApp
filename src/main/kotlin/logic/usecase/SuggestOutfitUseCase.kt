@@ -3,8 +3,7 @@ package org.example.logic.usecases
 import org.example.logic.exceptions.WeatherDataNotFoundException
 import org.example.logic.helper.*
 import org.example.logic.models.*
-import org.example.logic.repositories.WeatherRepository
-import org.intellij.lang.annotations.Language
+import logic.repository.WeatherRepository
 
 class SuggestOutfitUseCase(private val weatherRepository: WeatherRepository) {
 

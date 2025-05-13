@@ -4,9 +4,9 @@ import kotlinx.serialization.json.Json
 import org.example.data.dto.WeatherResponseDto
 import org.example.data.api.WeatherApiService
 
-class ApiDataSourceImpl(
+class WeatherDataSourceImpl(
     private val weatherApiService: WeatherApiService
-) : DataSource {
+) : WeatherDataSource {
 
     override suspend fun getWeatherData(
         city: String
@@ -15,5 +15,4 @@ class ApiDataSourceImpl(
 
         return Json.decodeFromString<WeatherResponseDto>(response)
     }
-
 }
