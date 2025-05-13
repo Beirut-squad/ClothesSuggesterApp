@@ -20,26 +20,28 @@ class ClothesSuggesterRepositoryImpl(
 ) : ClothesSuggesterRepository {
 
     override suspend fun getWeatherData(city: String): WeatherData {
-        try {
-            val weatherData = weatherDataSource.getWeatherData(city = city)
-            return weatherData.toWeatherData()
+        return try {
+             weatherDataSource.getWeatherData(city).toWeatherData()
         } catch (e: Exception) {
-            when (e) {
-                is UnAuthorizedException ->
-                    throw WeatherServiceAuthenticationException("Authentication with weather service failed")
-
-                is NotFoundException ->
-                    throw CityNotFoundException("No weather data for city $city")
-
-                is ServerErrorException ->
-                    throw WeatherServiceException("Couldn't connect to server")
-
-                else ->
-                    throw UnexpectedWeatherException("Unexpected error occurred")
-            }
+            throw mapToDomainException(e, city)
         }
     }
 
+    private fun mapToDomainException(e: Exception, city: String): Exception {
+        return when (e) {
+            is UnAuthorizedException ->
+                WeatherServiceAuthenticationException("Authentication with weather service failed")
+
+            is NotFoundException ->
+                CityNotFoundException("No weather data for city $city")
+
+            is ServerErrorException ->
+                WeatherServiceException("Couldn't connect to server")
+
+            else ->
+                UnexpectedWeatherException("Unexpected error occurred")
+        }
+    }
 
     override fun getOutfits(): List<List<Outfit>> {
         return listOf(
@@ -51,4 +53,5 @@ class ClothesSuggesterRepositoryImpl(
             outfitsDataSource.getDeathOutfits()
         )
     }
+
 }
