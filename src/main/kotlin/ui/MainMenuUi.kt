@@ -8,7 +8,8 @@ import org.example.ui.components.Viewer
 class MainMenuUi(
     private val viewer: Viewer,
     private val reader: Reader,
-    private val clothesSuggesterUi: ClothesSuggesterUi
+    private val clothesSuggesterUi: ClothesSuggesterUi,
+    private val currentWeatherUi: CurrentWeatherUi
 ) : UiFeature {
     override fun show() {
         viewer.printWelcomeMessage("Welcome")
@@ -17,7 +18,8 @@ class MainMenuUi(
         var isRunning = true
         while (isRunning) {
             viewer.printOptions(
-                "Suggest outfit for a person",
+                "Clothes Suggester",
+                "Get Current Weather",
                 "Exit"
             )
 
@@ -30,7 +32,12 @@ class MainMenuUi(
                         clothesSuggesterUi.show()
                     }
 
-                    2 -> {
+                    2-> {
+                        currentWeatherUi.show()
+                        println()
+                    }
+
+                    3 -> {
                         viewer.printGoodbyeMessage("Goodbye :)")
                         isRunning = false
                     }

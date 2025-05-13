@@ -5,20 +5,23 @@ import data.helpers.model_helpers.createWeatherDataHelper
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
-import org.example.data.datasource.WeatherDataSource
+import logic.repository.ClothesSuggesterRepository
+import org.example.data.repository.OutfitsDataSource
+import org.example.data.repository.WeatherDataSource
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import kotlin.test.assertFailsWith
 
-class WeatherRepositoryImplTest {
+class ClothesSuggesterRepositoryImplTest {
 
     private val weatherDataSource : WeatherDataSource = mockk()
-    private lateinit var weatherRepositoryImpl: WeatherRepositoryImpl
+    private val outfitsDataSource : OutfitsDataSource = mockk()
+    private lateinit var clothesSuggesterRepositoryImpl: ClothesSuggesterRepositoryImpl
 
     @BeforeEach
     fun setUp() {
-        weatherRepositoryImpl = WeatherRepositoryImpl(weatherDataSource)
+        clothesSuggesterRepositoryImpl = ClothesSuggesterRepositoryImpl(weatherDataSource,outfitsDataSource)
     }
 
     @Test
@@ -30,7 +33,7 @@ class WeatherRepositoryImplTest {
             coEvery { weatherDataSource.getWeatherData(city) } returns createWeatherResponseDtoHelper()
 
             // When
-            val result = weatherRepositoryImpl.getWeatherData(city)
+            val result = clothesSuggesterRepositoryImpl.getWeatherData(city)
 
             // Then
             assertEquals(result, expectedResult)
@@ -46,7 +49,7 @@ class WeatherRepositoryImplTest {
 
             // When & Then
             assertFailsWith<Exception> {
-                weatherRepositoryImpl.getWeatherData(city)
+                clothesSuggesterRepositoryImpl.getWeatherData(city)
             }
         }
     }

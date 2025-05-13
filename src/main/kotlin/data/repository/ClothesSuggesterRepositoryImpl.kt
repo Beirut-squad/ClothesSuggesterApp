@@ -1,20 +1,23 @@
 package data.repository
 
-import org.example.data.datasource.WeatherDataSource
+import org.example.data.repository.WeatherDataSource
 import data.exception.NotFoundException
 import data.exception.ServerErrorException
 import data.exception.UnAuthorizedException
 import data.mapper.toWeatherData
 import org.example.logic.models.WeatherData
-import logic.repository.WeatherRepository
+import logic.repository.ClothesSuggesterRepository
+import org.example.data.repository.OutfitsDataSource
 import org.example.logic.exceptions.WeatherServiceAuthenticationException
 import org.example.logic.exceptions.CityNotFoundException
 import org.example.logic.exceptions.UnexpectedWeatherException
 import org.example.logic.exceptions.WeatherServiceException
+import org.example.logic.models.Outfit
 
-class WeatherRepositoryImpl(
-    private val weatherDataSource: WeatherDataSource
-) : WeatherRepository {
+class ClothesSuggesterRepositoryImpl(
+    private val weatherDataSource: WeatherDataSource,
+    private val outfitsDataSource: OutfitsDataSource
+) : ClothesSuggesterRepository {
 
     override suspend fun getWeatherData(city: String): WeatherData {
         try {
@@ -35,5 +38,17 @@ class WeatherRepositoryImpl(
                     throw UnexpectedWeatherException("Unexpected error occurred")
             }
         }
+    }
+
+
+    override fun getOutfits(): List<List<Outfit>> {
+        return listOf(
+            outfitsDataSource.getFreezingOutfits(),
+            outfitsDataSource.getColdOutfits(),
+            outfitsDataSource.getAverageOutfits(),
+            outfitsDataSource.getWarmOutfits(),
+            outfitsDataSource.getHotOutfits(),
+            outfitsDataSource.getDeathOutfits()
+        )
     }
 }
