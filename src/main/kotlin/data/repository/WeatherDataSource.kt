@@ -1,7 +1,7 @@
-package org.example.data.datasource
+package org.example.data.repository
 
 import org.example.data.dto.WeatherResponseDto
 
-interface DataSource {
+interface WeatherDataSource {
     suspend fun getWeatherData(city: String): WeatherResponseDto
 }

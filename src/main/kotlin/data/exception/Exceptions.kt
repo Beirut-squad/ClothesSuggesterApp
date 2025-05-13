@@ -1,9 +1,9 @@
 package data.exception
 
-class UnAuthorizedException(message: String): Exception(message)
+class UnAuthorizedException(): Exception()
 
-class NotFoundException(message: String) : Exception(message)
+class NotFoundException() : Exception()
 
-class ServerErrorException(message: String) : Exception(message)
+class ServerErrorException() : Exception()
 
-class UnknownApiException(message: String) : Exception(message)
+class UnknownApiException() : Exception()

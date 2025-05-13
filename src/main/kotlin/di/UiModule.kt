@@ -7,6 +7,7 @@ import org.example.ui.components.Reader
 import org.example.ui.components.Viewer
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
+import org.example.ui.CurrentWeatherUi
 
 val uiModule = module {
     singleOf(::Colors)
@@ -14,4 +15,5 @@ val uiModule = module {
     singleOf(::Reader)
     singleOf(::MainMenuUi)
     singleOf(::ClothesSuggesterUi)
+    singleOf(::CurrentWeatherUi)
 }

@@ -1,15 +1,14 @@
-package org.example.logic.usecases
+package logic.usecase
 
 import org.example.logic.exceptions.WeatherDataNotFoundException
-import org.example.logic.helper.*
 import org.example.logic.models.*
-import org.example.logic.repositories.WeatherRepository
-import org.intellij.lang.annotations.Language
+import logic.repository.ClothesSuggesterRepository
+import org.example.logic.utils.OutfitIndex
 
-class SuggestOutfitUseCase(private val weatherRepository: WeatherRepository) {
+class SuggestOutfitUseCase(private val clothesSuggesterRepository: ClothesSuggesterRepository) {
 
     suspend fun getOutfitBasedOnTemperature(city : String): Outfit {
-        val weatherData = weatherRepository.getWeatherData(city)
+        val weatherData = clothesSuggesterRepository.getWeatherData(city)
         if (checkIfNull(weatherData))
             throw WeatherDataNotFoundException(" weather data not found")
 
@@ -31,12 +30,12 @@ class SuggestOutfitUseCase(private val weatherRepository: WeatherRepository) {
 
     private fun getOutfitsBasedOnTemperature(temp: Double): List<Outfit> {
         return when (temp) {
-            in -50.0..7.0 -> freezingOutfits
-            in 7.1..13.0 -> coldOutfits
-            in 13.1..18.0 -> averageOutfits
-            in 18.1..26.0 -> warmOutfits
-            in 26.1..50.0 -> hotOutfits
-            else -> deathOutfits
+            in -50.0..7.0 -> clothesSuggesterRepository.getOutfits()[OutfitIndex.FREEZING_OUTFIT]
+            in 7.1..13.0 -> clothesSuggesterRepository.getOutfits()[OutfitIndex.COLD_OUTFIT]
+            in 13.1..18.0 -> clothesSuggesterRepository.getOutfits()[OutfitIndex.AVERAGE_OUTFIT]
+            in 18.1..26.0 -> clothesSuggesterRepository.getOutfits()[OutfitIndex.WARM_OUTFIT]
+            in 26.1..50.0 -> clothesSuggesterRepository.getOutfits()[OutfitIndex.HOT_OUTFIT]
+            else -> clothesSuggesterRepository.getOutfits()[OutfitIndex.OTHER_OUTFITS]
         }
     }
 }
