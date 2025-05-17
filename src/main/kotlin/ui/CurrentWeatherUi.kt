@@ -15,8 +15,13 @@ class CurrentWeatherUi(
         val cityName = readCity()
         runBlocking {
             viewer.printLoader("Loading...")
-            val currentTemp = getCurrentWeather.getCurrentTemperature(cityName)
-            viewer.printCorrectOutput("Current temperature in $cityName is $currentTemp  enjoy your day \uD83D\uDE0E") //😎
+            val temperature = getCurrentWeather.getCurrentTemperature(cityName)
+            viewer.printCorrectOutput(
+                "temperature in $cityName is:\n" +
+                        "${temperature.first} ^C\n" +
+                        "feels like: ${temperature.second} ^C\n" +
+                        "enjoy your day \uD83D\uDE0E"
+            ) //
         }
     }
 

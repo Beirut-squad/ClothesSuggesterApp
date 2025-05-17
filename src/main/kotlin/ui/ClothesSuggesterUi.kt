@@ -1,7 +1,7 @@
 package org.example.ui
 
 import kotlinx.coroutines.runBlocking
-import org.example.logic.models.Outfit
+import org.example.logic.models.extra_models.Outfit
 import logic.usecase.SuggestOutfitUseCase
 import org.example.ui.components.Reader
 import org.example.ui.components.UiFeature

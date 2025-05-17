@@ -1,6 +1,6 @@
 package data.helpers.model_helpers
 
-import org.example.logic.models.Weather
+import org.example.logic.models.extra_models.Weather
 
 fun createWeatherHelper(
     id: Int = 801,

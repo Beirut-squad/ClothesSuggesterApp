@@ -1,6 +1,6 @@
 package data.helpers.model_helpers
 
-import org.example.logic.models.AtmosphericDetails
+import org.example.logic.models.extra_models.AtmosphericDetails
 
 
 fun createAtmosphericDetailsHelper(

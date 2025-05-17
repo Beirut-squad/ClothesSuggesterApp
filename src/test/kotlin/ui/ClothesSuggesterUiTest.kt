@@ -5,7 +5,7 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.runBlocking
-import org.example.logic.models.Outfit
+import org.example.logic.models.extra_models.Outfit
 import logic.usecase.SuggestOutfitUseCase
 import org.example.ui.ClothesSuggesterUi
 import org.example.ui.components.Reader
