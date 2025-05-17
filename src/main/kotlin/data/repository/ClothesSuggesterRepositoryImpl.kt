@@ -4,15 +4,17 @@ import org.example.data.repository.WeatherDataSource
 import data.exception.NotFoundException
 import data.exception.ServerErrorException
 import data.exception.UnAuthorizedException
+import data.mapper.toTemperature
 import data.mapper.toWeatherData
-import org.example.logic.models.WeatherData
+import org.example.logic.models.extra_models.WeatherData
 import logic.repository.ClothesSuggesterRepository
 import org.example.data.repository.OutfitsDataSource
 import org.example.logic.exceptions.WeatherServiceAuthenticationException
 import org.example.logic.exceptions.CityNotFoundException
 import org.example.logic.exceptions.UnexpectedWeatherException
 import org.example.logic.exceptions.WeatherServiceException
-import org.example.logic.models.Outfit
+import org.example.logic.models.basic_model.Temperature
+import org.example.logic.models.extra_models.Outfit
 
 class ClothesSuggesterRepositoryImpl(
     private val weatherDataSource: WeatherDataSource,
@@ -22,6 +24,14 @@ class ClothesSuggesterRepositoryImpl(
     override suspend fun getWeatherData(city: String): WeatherData {
         return try {
              weatherDataSource.getWeatherData(city).toWeatherData()
+        } catch (e: Exception) {
+            throw mapToDomainException(e, city)
+        }
+    }
+
+    override suspend fun getTemperatureData(city: String): Temperature {
+        return try {
+            weatherDataSource.getAtmosphericDetails(city).toTemperature()
         } catch (e: Exception) {
             throw mapToDomainException(e, city)
         }

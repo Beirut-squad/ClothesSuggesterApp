@@ -1,7 +1,8 @@
 package data.mapper
 
 import org.example.data.dto.*
-import org.example.logic.models.*
+import org.example.logic.models.basic_model.Temperature
+import org.example.logic.models.extra_models.*
 
 
 fun WeatherResponseDto.toWeatherData(): WeatherData {
@@ -17,6 +18,13 @@ fun WeatherResponseDto.toWeatherData(): WeatherData {
         id = this.id,
         name = this.name,
         httpResponseCode = this.httpResponseCode
+    )
+}
+
+fun AtmosphericDetailsDto?.toTemperature(): Temperature {
+    return Temperature(
+        temperature = this?.temperature,
+        feelsLike = this?.feelsLike,
     )
 }
 

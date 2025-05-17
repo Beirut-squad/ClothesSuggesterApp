@@ -1,4 +1,4 @@
-package org.example.logic.models
+package org.example.logic.models.extra_models
 
 data class Wind(
     val speed: Double?,

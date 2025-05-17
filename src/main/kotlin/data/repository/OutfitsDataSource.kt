@@ -1,6 +1,6 @@
 package org.example.data.repository
 
-import org.example.logic.models.Outfit
+import org.example.logic.models.extra_models.Outfit
 
 interface OutfitsDataSource {
     fun getFreezingOutfits(): List<Outfit>

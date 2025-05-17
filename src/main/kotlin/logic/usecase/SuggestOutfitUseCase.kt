@@ -1,28 +1,29 @@
 package logic.usecase
 
 import org.example.logic.exceptions.WeatherDataNotFoundException
-import org.example.logic.models.*
 import logic.repository.ClothesSuggesterRepository
+import org.example.logic.models.basic_model.Temperature
+import org.example.logic.models.extra_models.Outfit
 import org.example.logic.utils.OutfitIndex
 
 class SuggestOutfitUseCase(private val clothesSuggesterRepository: ClothesSuggesterRepository) {
 
     suspend fun getOutfitBasedOnTemperature(city : String): Outfit {
-        val weatherData = clothesSuggesterRepository.getWeatherData(city)
-        if (checkIfNull(weatherData))
+        val temperatureData = clothesSuggesterRepository.getTemperatureData(city)
+        if (checkIfNull(temperatureData))
             throw WeatherDataNotFoundException(" weather data not found")
 
-        return getRandomOutfitBasedOnTemp(weatherData)
+        return getRandomOutfitBasedOnTemp(temperatureData)
     }
 
-    private fun checkIfNull(weatherData: WeatherData): Boolean {
-        return weatherData.atmosphericData?.temperature == null ||
-                weatherData.atmosphericData.feelsLike == null
+    private fun checkIfNull(temperatureData: Temperature?): Boolean {
+        return temperatureData?.temperature == null ||
+                temperatureData.feelsLike == null
     }
 
-    private fun getRandomOutfitBasedOnTemp(weatherData: WeatherData): Outfit {
-        val temp = weatherData.atmosphericData!!.temperature
-        val feelsLike = weatherData.atmosphericData.feelsLike
+    private fun getRandomOutfitBasedOnTemp(temperatureData: Temperature): Outfit {
+        val temp = temperatureData.temperature
+        val feelsLike = temperatureData.feelsLike
         val avgTemp = (temp!! + feelsLike!!) / 2
         val outfits = getOutfitsBasedOnTemperature(avgTemp)
         return outfits.shuffled().first()

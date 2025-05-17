@@ -1,4 +1,4 @@
-package org.example.logic.models
+package org.example.logic.models.extra_models
 
 data class WeatherData(
     val weather: List<Weather>?,

@@ -1,10 +1,10 @@
 package data.helpers.model_helpers
 
-import org.example.logic.models.AtmosphericDetails
-import org.example.logic.models.Clouds
-import org.example.logic.models.Weather
-import org.example.logic.models.WeatherData
-import org.example.logic.models.Wind
+import org.example.logic.models.extra_models.AtmosphericDetails
+import org.example.logic.models.extra_models.Clouds
+import org.example.logic.models.extra_models.Weather
+import org.example.logic.models.extra_models.WeatherData
+import org.example.logic.models.extra_models.Wind
 
 fun createWeatherDataHelper(
     weather: List<Weather>? = listOf(createWeatherHelper()),

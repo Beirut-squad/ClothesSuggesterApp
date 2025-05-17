@@ -1,7 +1,7 @@
 package org.example.data.datasource
 
 import org.example.data.repository.OutfitsDataSource
-import org.example.logic.models.Outfit
+import org.example.logic.models.extra_models.Outfit
 
 class OutfitsDataSourceImpl : OutfitsDataSource {
     override fun getFreezingOutfits(): List<Outfit> {
